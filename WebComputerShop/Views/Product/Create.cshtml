@@ -1,0 +1,88 @@
+﻿@model WebComputerShop.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+</style>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row align-items-center h-100 mt-5">
+        <div class="col-6 mx-auto">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="card" style="width: 40rem;">
+                        <img id="Poster" src=""
+                             class="card-img-top">
+
+                        <div class="card-body d-flex flex-column text-start align-items-start justify-content-center" style="background-color: #031D43;">
+                            <div class="row text-end">
+                            </div>
+                            <h5 class="card-title mb-4 text-white">เพิ่มสินค้า</h5>
+
+                            <div class="row">
+                                <div class="mb-3">
+                                    <input asp-for="Name" type="text"
+                                           class="form-control text-white" 
+                                           style="background-color: #052C65;" 
+                                           placeholder="ชื่อสินค้า (Name)"r equired>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="Description" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="รายละเอียด (Description)" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="UnitPrice" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="ราคา (UnitPrice)" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="Stock" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="จำนวนสินค้า (Stock)" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="Image" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="ภาพ (Image)" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="ProductId" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="รหัสสินค้า (ProductId)" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input asp-for="ProductTypeId" type="text"
+                                           class="form-control text-white"
+                                           style="background-color: #052C65;"
+                                           placeholder="รหัสประเภทสินค้า (ProductTypeId)" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a asp-action="Index" class="btn btn-danger form-control">ยกเลิก</a>
+                                </div>
+                                <div class="col">
+                                    <input type="submit" class="btn btn-primary form-control" value="บันทึก">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
