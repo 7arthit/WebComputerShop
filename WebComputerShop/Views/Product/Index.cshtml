@@ -2,18 +2,24 @@
 
 @{
     ViewData["Title"] = "View";
+    var totalPages = 101;
+    var pagesToShow = 10;
+    var currentPage = 1;
 }
 
 <p>
     <a asp-action="Create" class="btn btn-success">เพิ่มสินค้า</a>
 </p>
 
-<p>
-    <a name="page" asp-action="GetProducts" asp-route-page="1">1</a>
-    <a name="page" asp-action="GetProducts" asp-route-page="2">2</a>
-    <a name="page" asp-action="GetProducts" asp-route-page="3">3</a>
-
-</p>
+<form asp-controller="Product" asp-action="Index" method="get" class="form-inline">
+    <div class="input-group mb-2">
+        <input type="text" class="form-control" id="searchText" name="searchText" placeholder="ป้อนชื่อเพื่อค้นหา">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">ค้นหา</button>
+        </div>
+    </div>
+    <input type="hidden" name="page" value="@currentPage" />
+</form>
 
 <table class="table">
     <thead>
@@ -73,11 +79,43 @@
                 @Html.DisplayFor(modelItem => item.ProductTypeId)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id },new{@class = "btn btn-info"}) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("แก้ไข", "Edit", new {id=item.Id  },new{@class = "btn btn-secondary"})
+                @Html.ActionLink("รายละเอียด", "Details", new { id=item.Id },new{@class = "btn btn-info"})
+                @Html.ActionLink("ลบ", "Delete", new { id=item.Id },new{onclick="return confirm('Are you sure want to delete?')",@class = "btn btn-danger"})
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<p>
+    @if (totalPages > pagesToShow)
+    {
+        int startPage = Math.Max(1, currentPage - (pagesToShow / 2));
+        int endPage = Math.Min(totalPages, startPage + pagesToShow - 1);
+
+        if (startPage > 1)
+        {
+            <a name="page" asp-action="Index" asp-route-page="1" class="btn btn-info">1</a>
+            <span>...</span>
+        }
+
+        for (int i = startPage; i <= endPage; i++)
+        {
+            <a name="page" asp-action="Index" asp-route-page="@i" class="btn btn-info">@i</a>
+        }
+
+        if (endPage < totalPages)
+        {
+            <span>...</span>
+            <a name="page" asp-action="Index" asp-route-page="@totalPages" class="btn btn-info">@totalPages</a>
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= totalPages; i++)
+        {
+            <a name="page" asp-action="Index" asp-route-page="@i" class="btn btn-info">@i</a>
+        }
+    }
+</p>
