@@ -12,14 +12,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <style>
+
+        .card {
+            flex-direction: row;
+        }
+
+            .card img {
+                height: 400px;
+                width: 270px;
+            }
+    </style>
 </head>
 <body style="background-color:#031633;">
     @if (User.Identity.IsAuthenticated)
     {
 
-        <nav class="navbar navbar-expand-sm fixed-top navbar-light border-bottom box-shadow text-white" style="background-color:#020E22;">
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow text-white" style="background-color:#020E22;">
             <div class="container my-3">
-                <p class="navbar-brand text-white" style="margin: 0;">ProjectComputerShop</p>
+                <p class="navbar-brand text-white" style="margin: 0;">ProjectWebFinal</p>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,13 +57,7 @@
             </div>
         </nav>
     }
-    <div class="container mt-3">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-
+    @RenderBody()
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
             integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
             crossorigin="anonymous"></script>

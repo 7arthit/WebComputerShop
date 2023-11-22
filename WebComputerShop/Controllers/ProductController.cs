@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using WebComputerShop.Models;
 
 namespace WebComputerShop.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         HttpClientHandler _clientHandler = new HttpClientHandler();
@@ -15,7 +17,7 @@ namespace WebComputerShop.Controllers
                 (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
-        public async Task<ActionResult> Index(String searchText, int page = 1, int per_page = 10)
+        public async Task<ActionResult> Index(String searchText, int page, int per_page)
         {
             List<Product>? products = await GetProducts(page, per_page);
 
@@ -27,7 +29,7 @@ namespace WebComputerShop.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Product>?> GetProducts(int page, int per_page)
+        public async Task<List<Product>?> GetProducts(int page = 1 , int per_page = 10)
         {
             List<Product>? products = new List<Product>();
             string apiUrl = $"https://localhost:7091/api/Products?page={page}&per_page={per_page}";
@@ -62,6 +64,7 @@ namespace WebComputerShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Product model)
         {
 
@@ -136,6 +139,7 @@ namespace WebComputerShop.Controllers
         }
  
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(int id, Product product)
         {
           

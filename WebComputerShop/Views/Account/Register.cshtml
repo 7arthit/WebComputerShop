@@ -1,0 +1,59 @@
+﻿@model WebComputerShop.Models.Employee
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+<div class="container">
+        <div class="row align-items-center vh-100">
+            <div class="col-6 mx-auto">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="card boder rounded" style="width: 28rem;">
+                            <div class="card-body">
+                                <div class="text-left h3">
+                                    <a asp-action="Login" asp-controller="Account"><i class="fa-solid fa-arrow-left-long"></i></a>
+                                </div>
+                                <form class="text-center" method="post" asp-action="Register">
+                                    <h5 class="card-title my-3">สมัครสมาชิก</h5>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <input type="text" asp-for="Name" class="form-control" placeholder="ชื่อ (Name)" required>
+                                            </div>
+                                        </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <input type="text" asp-for="Image" class="form-control" placeholder="รูปภาพ (Image)" required>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mb-3">
+                                            <input type="text" asp-for="Role" class="form-control" placeholder="หน้าที่ (Role)" required>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="email" asp-for="UserName" class="form-control" placeholder="อีเมล (email)" required>
+                                        <span class="text-danger">@TempData["emailExist"]</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="password" asp-for="Password" class="form-control" placeholder="รหัสผ่าน (password)" required>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="สมัครสมาชิก"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
